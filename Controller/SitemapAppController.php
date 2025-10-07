@@ -9,6 +9,6 @@ App::uses('AppController', 'Controller');
 /**
  * SitemapAppController
  */
-class SitemapAppController extends AppController {
-
+class SitemapAppController extends AppController
+{
 }

@@ -5,33 +5,37 @@
  * @package Sitemap.Test.Case
  */
 
+use PHPUnit\Framework\TestSuite;
+
 /**
  * AllSitemapTest
  */
-class AllSitemapTest extends PHPUnit_Framework_TestSuite {
+class AllSitemapTest extends TestSuite
+{
+    /**
+     * the suites to load
+     *
+     * @var array
+     */
+    public static $suites = [
+    ];
 
-	/**
-	 * the suites to load
-	 * @var array
-	 */
-	public static $suites = array(
-	);
+    /**
+     * load the suites
+     *
+     * @return CakeTestSuite
+     */
+    public static function suite(): CakeTestSuite
+    {
+        $path = dirname(__FILE__) . '/';
+        $suite = new CakeTestSuite('All Sitemap Tests');
 
-	/**
-	 * load the suites
-	 *
-	 * @return CakeTestSuite
-	 */
-	public static function suite() {
-		$path = dirname(__FILE__) . '/';
-		$suite = new CakeTestSuite('All Sitemap Tests');
+        foreach (self::$suites as $file) {
+            if (is_readable($path . $file)) {
+                $suite->addTestFile($path . $file);
+            }
+        }
 
-		foreach (self::$suites as $file) {
-			if (is_readable($path . $file)) {
-				$suite->addTestFile($path . $file);
-			}
-		}
-		return $suite;
-	}
-
+        return $suite;
+    }
 }

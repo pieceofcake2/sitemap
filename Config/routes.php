@@ -4,8 +4,8 @@
 Router::parseExtensions('xml');
 
 // connect the /sitemap to the sitemap controller
-Router::connect('/sitemap', array(
-	'plugin' => 'sitemap',
-	'controller' => 'sitemaps',
-	'action' => 'display'
-));
+Router::connect('/sitemap', [
+    'plugin' => 'sitemap',
+    'controller' => 'sitemaps',
+    'action' => 'display',
+]);
