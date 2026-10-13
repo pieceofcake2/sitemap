@@ -21,8 +21,8 @@ A CakePHP 2.x Plugin for adding automatic XML and HTML Sitemaps to an CakePHP ap
 
 ## Requirements
 
+* CakePHP 2.12+
 * PHP 8.0+
-* CakePHP 2.10+
 
 ## Installation
 

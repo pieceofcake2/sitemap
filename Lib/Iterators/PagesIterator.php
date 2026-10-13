@@ -80,7 +80,7 @@ class PagesIterator extends ExtFilteredDirIterator
      * @access public
      * @return bool     True if the basename of the current file does not begin with "admin_".
      */
-    public function accept()
+    public function accept(): bool
     {
         $current = parent::current();
 
@@ -115,7 +115,7 @@ class PagesIterator extends ExtFilteredDirIterator
      *                  (relative to Cake's root folder), bytes, modified
      *                  (and 'children', in the case of directories) fields.
      */
-    public function current()
+    public function current(): mixed
     {
         $fileinfo = parent::current();
         $depth = $this->depth;
