@@ -12,6 +12,10 @@ permissions:
   contents: read
   id-token: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   phpunit:
     runs-on: ubuntu-latest
@@ -39,44 +43,44 @@ jobs:
       - name: Start MySQL 5.6
         if: matrix.db-type == 'mysql'
         run: |
-          docker run -d --name mysql56 \
-            -e MYSQL_ROOT_PASSWORD=root \
-            -e MYSQL_DATABASE=cakephp_test \
-            -p 3306:3306 \
-            -v ${{ github.workspace }}/docker/mysql:/docker-entrypoint-initdb.d:ro \
-            --health-cmd="mysqladmin ping" \
-            --health-interval=10s \
-            --health-timeout=5s \
-            --health-retries=3 \
-            mysql:5.6
+            docker run -d --name mysql56 \
+              -e MYSQL_ROOT_PASSWORD=root \
+              -e MYSQL_DATABASE=cakephp_test \
+              -p 3306:3306 \
+              -v ${{ github.workspace }}/docker/mysql:/docker-entrypoint-initdb.d:ro \
+              --health-cmd="mysqladmin ping" \
+              --health-interval=10s \
+              --health-timeout=5s \
+              --health-retries=3 \
+              mysql:5.6
 
       - name: Start MySQL 8.0
         if: matrix.db-type == 'mysql80'
         run: |
-          docker run -d --name mysql80 \
-            -e MYSQL_ROOT_PASSWORD=root \
-            -e MYSQL_DATABASE=cakephp_test \
-            -p 3307:3306 \
-            -v ${{ github.workspace }}/docker/mysql:/docker-entrypoint-initdb.d:ro \
-            --health-cmd="mysqladmin ping" \
-            --health-interval=10s \
-            --health-timeout=5s \
-            --health-retries=3 \
-            mysql:8.0
+            docker run -d --name mysql80 \
+              -e MYSQL_ROOT_PASSWORD=root \
+              -e MYSQL_DATABASE=cakephp_test \
+              -p 3307:3306 \
+              -v ${{ github.workspace }}/docker/mysql:/docker-entrypoint-initdb.d:ro \
+              --health-cmd="mysqladmin ping" \
+              --health-interval=10s \
+              --health-timeout=5s \
+              --health-retries=3 \
+              mysql:8.0
 
       - name: Start PostgreSQL 9.4
         if: matrix.db-type == 'pgsql'
         run: |
-          docker run -d --name postgres94 \
-            -e POSTGRES_PASSWORD=postgres \
-            -e POSTGRES_DB=cakephp_test \
-            -p 5432:5432 \
-            -v ${{ github.workspace }}/docker/pgsql:/docker-entrypoint-initdb.d:ro \
-            --health-cmd="pg_isready" \
-            --health-interval=10s \
-            --health-timeout=5s \
-            --health-retries=5 \
-            postgres:9.4
+            docker run -d --name postgres94 \
+              -e POSTGRES_PASSWORD=postgres \
+              -e POSTGRES_DB=cakephp_test \
+              -p 5432:5432 \
+              -v ${{ github.workspace }}/docker/pgsql:/docker-entrypoint-initdb.d:ro \
+              --health-cmd="pg_isready" \
+              --health-interval=10s \
+              --health-timeout=5s \
+              --health-retries=5 \
+              postgres:9.4
 
       - name: Install PHP with extensions
         uses: shivammathur/setup-php@v2
@@ -84,18 +88,13 @@ jobs:
           php-version: ${{ matrix.php-version }}
           extensions: apcu, memcache, memcached, redis, mcrypt, pdo_mysql, pdo_pgsql, pdo_sqlite, pdo_sqlsrv
           ini-values: |
-            apc.enable_cli=1
+              apc.enable_cli=1
           coverage: xdebug
 
       - name: locale-gen
         run: |
           sudo locale-gen de_DE;
           sudo locale-gen es_ES;
-
-      - name: Install wkhtmltopdf
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wkhtmltopdf
 
       - name: Composer get cache directory
         id: composer-cache
@@ -110,7 +109,7 @@ jobs:
             ${{ runner.os }}-php${{ matrix.php-version }}-composer-
 
       - name: Install Composer Packages
-        run: composer install --prefer-dist --no-interaction --no-progress
+        run: composer install --no-ansi --no-interaction --no-progress
 
       - name: Make temporary directories writable
         run: |
@@ -118,7 +117,7 @@ jobs:
           chmod -R 777 ./vendor/pieceofcake2/app/logs
 
       - name: Copy database.php
-        run: cp ./vendor/pieceofcake2/cakephp/lib/Cake/Test/Config/database.php ./vendor/pieceofcake2/app/config/
+        run: cp ./vendor/pieceofcake2/cakephp/tests/config/database.php ./vendor/pieceofcake2/app/config/
 
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
