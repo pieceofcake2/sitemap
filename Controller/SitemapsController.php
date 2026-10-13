@@ -4,7 +4,7 @@
  *
  * @package Sitemap.Controller
  */
-App::uses('AppController', 'Controller');
+App::uses('SitemapAppController', 'Sitemap.Controller');
 App::uses('PagesIterator', 'Sitemap.Lib/Iterators');
 
 /**
@@ -80,12 +80,11 @@ class SitemapsController extends SitemapAppController
             App::uses($model, 'Model');
 
             // We need to load the class
-            $newModel = new $model();
+            $newModel = ClassRegistry::init($model);
 
-            if (!empty($newModel->actsAs) && array_key_exists('Sitemap.Sitemap', $newModel->actsAs)) {
+            if ($newModel->Behaviors->loaded('Sitemap')) {
                 $response = $newModel->generateSitemapData();
                 $sitemapData[$newModel->name] = $response;
-            } else {
             }
             unset($newModel);
         }
@@ -99,7 +98,7 @@ class SitemapsController extends SitemapAppController
     /**
      * _generateListOfModels - generate the list of models
      *
-     * @return void
+     * @return array
      */
     protected function _generateListOfModels()
     {
@@ -121,15 +120,38 @@ class SitemapsController extends SitemapAppController
     }
 
     /**
+     * _findPagesPath - find the directory containing the static pages
+     *
+     * Looks through all View paths (e.g. `src/View/` and `templates/`).
+     *
+     * @return string|null
+     */
+    protected function _findPagesPath()
+    {
+        foreach (App::path('View') as $path) {
+            if (is_dir($path . 'Pages')) {
+                return $path . 'Pages' . DS;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * _generateListOfStaticPages - generate the list of static pages and the sitemap data
      *
-     * @return void
+     * @return array
      */
     protected function _generateListOfStaticPages()
     {
         $pagesSitemap = [];
 
-        $pages = new PagesIterator(APP . 'View' . DS . 'Pages' . DS, [], $this->request->webroot);
+        $pagesPath = $this->_findPagesPath();
+        if ($pagesPath === null) {
+            return $pagesSitemap;
+        }
+
+        $pages = new PagesIterator($pagesPath, [], $this->request->webroot);
         $pagesArray = iterator_to_array($pages);
 
         foreach ($pagesArray as $key => $page) {
