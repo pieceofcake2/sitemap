@@ -48,7 +48,7 @@ class ExtFilteredDirIterator extends FilterIterator
      * @access public
      * @return bool True for all non-dot directories, and files with extensions in $this->allowed.
      */
-    public function accept()
+    public function accept(): bool
     {
         $current = parent::current();
 
