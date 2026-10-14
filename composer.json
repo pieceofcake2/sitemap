@@ -1,6 +1,6 @@
 {
     "name": "pieceofcake2/sitemap",
-    "description": "A CakePHP 2 Plugin for adding automatic XML and HTML Sitemaps to an app",
+    "description": "Automatic XML and HTML sitemaps for CakePHP 2 applications",
     "type": "cakephp-plugin",
     "keywords": ["cakephp", "cakephp2", "model", "behavior", "sitemap"],
     "license": "MIT",

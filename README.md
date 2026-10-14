@@ -8,67 +8,34 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/pieceofcake2/sitemap/CI.yml?label=CI)](https://github.com/pieceofcake2/sitemap/actions/workflows/CI.yml)
 [![Codecov](https://img.shields.io/codecov/c/gh/pieceofcake2/sitemap?label=Coverage)](https://codecov.io/gh/pieceofcake2/sitemap)
 
-__This is forked for CakePHP2.__
-
-A CakePHP 2.x Plugin for adding automatic XML and HTML Sitemaps to an CakePHP app
-
-## Background
-
-* Only generates a sitemap currently for models in the core App, not in Plugins.
-* Generates an HTML list using a dl list.
-* Generates an sitemap.xml file as well.
-* View caching used for the HTML files.
-* Allows for setting a custom callback function to build urls.
+pieceofcake2/sitemap adds automatic XML and HTML sitemaps to a CakePHP 2 application. Add the
+`Sitemap.Sitemap` behavior to your models and their records are listed at `/sitemap.xml`
+and `/sitemap`, together with the static pages of the application.
 
 ## Requirements
 
-* CakePHP 2.12+
 * PHP 8.0+
+* pieceofcake2/cakephp 2.12+
 
 ## Installation
 
-### Composer
+```bash
+composer require pieceofcake2/sitemap
+```
 
-````bash
-$ composer require pieceofcake2/sitemap
-````
+Then load the plugin with its routes and add the behavior to your models.
+See [Installation](docs/README.md#installation) and [Usage](docs/README.md#usage).
 
-## Usage
+## Documentation
 
-* Add this this line to your `bootstrap.php`:
-
-````php
-CakePlugin::load(['Sitemap' => ['routes' => true]]);
-````
-
-* Add the behavior to the model desired to generate a sitemap for that model
-
-````php
-public $actsAs = [
-    'Sitemap.Sitemap' => [
-        'primaryKey' => 'id', // Default primary key field
-        'loc' => 'buildUrl', // Default function called that builds a url, passes parameters (Model $Model, $primaryKey)
-        'lastmod' => 'modified', // Default last modified field, can be set to FALSE if no field for this
-        'changefreq' => 'daily', // Default change frequency applied to all model items of this type, can be set to FALSE to pass no value
-        'priority' => '0.9', // Default priority applied to all model items of this type, can be set to FALSE to pass no value
-        'conditions' => [], // Conditions to limit or control the returned results for the sitemap
-    ]
-];
-````
-
-* Sitemap should now be visible at /sitemap and /sitemap.xml
+Documentation: https://pieceofcake2.github.io/sitemap/
 
 ## Contributing
 
-### Reporting Issues
+See the [contribution guidelines](https://github.com/pieceofcake2/.github/blob/master/CONTRIBUTING.md).
 
-Please use [GitHub Isuses](https://github.com/pieceofcake2/sitemap/issues) for listing any known defects or issues.
+Please report issues on [GitHub](https://github.com/pieceofcake2/sitemap/issues).
 
-## License ##
+## License
 
-[MIT](./LICENSE)
-
-
-## Copyright ##
-
-[Loadsys Web Strategies](https://www.loadsys.com) 2016
+MIT License. Originally developed by [Loadsys Web Strategies](https://www.loadsys.com). See [LICENSE](LICENSE).
