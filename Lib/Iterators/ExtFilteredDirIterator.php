@@ -13,7 +13,7 @@ class ExtFilteredDirIterator extends FilterIterator
      * Files not ending in one of these extensions will be excluded from the
      * list.
      *
-     * @var array
+     * @var array|null
      */
     private $allowed = null;
 

@@ -82,6 +82,11 @@ class SitemapsController extends SitemapAppController
             // We need to load the class
             $newModel = ClassRegistry::init($model);
 
+            // The Model directory may also contain classes that are not models.
+            if (!$newModel instanceof Model) {
+                continue;
+            }
+
             if ($newModel->Behaviors->loaded('Sitemap')) {
                 $response = $newModel->generateSitemapData();
                 $sitemapData[$newModel->name] = $response;

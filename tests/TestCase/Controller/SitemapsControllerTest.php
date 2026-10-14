@@ -73,6 +73,15 @@ class SitemapsControllerTest extends ControllerTestCase
         }
     }
 
+    public function testDisplaySkipsNonModelClasses(): void
+    {
+        $this->assertContains('SitemapValueObject', App::objects('Model'));
+
+        $vars = $this->testAction('/sitemap', ['method' => 'get', 'return' => 'vars']);
+
+        $this->assertArrayNotHasKey('SitemapValueObject', $vars['sitemapData']);
+    }
+
     public function testDisplayHtml(): void
     {
         $result = $this->testAction('/sitemap', ['method' => 'get', 'return' => 'contents']);
