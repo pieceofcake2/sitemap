@@ -27,8 +27,8 @@ composer require pieceofcake2/sitemap
 
 | レイアウト | `installer-paths` |
 | --- | --- |
-| モダン (`config/`, `src/`, `templates/`, `plugins/`) | `"plugins/{$name}/": ["type:cakephp-plugin"]` |
-| レガシー (`app/Config/`, `app/Plugin/`) | `"app/Plugin/{$name}/": ["type:cakephp-plugin"]` |
+| モダン (`config/`、`src/`、`templates/`、`plugins/`) | `"plugins/{$name}/": ["type:cakephp-plugin"]` |
+| レガシー (`app/Config/`、`app/Plugin/`) | `"app/Plugin/{$name}/": ["type:cakephp-plugin"]` |
 
 `config/bootstrap.php` (レガシーレイアウトでは `app/Config/bootstrap.php`) で、プラグインを
 ルートとともに読み込みます。
