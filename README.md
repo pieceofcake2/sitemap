@@ -12,6 +12,13 @@ pieceofcake2/sitemap adds automatic XML and HTML sitemaps to a CakePHP 2 applica
 `Sitemap.Sitemap` behavior to your models and their records are listed at `/sitemap.xml`
 and `/sitemap`, together with the static pages of the application.
 
+## Documentation
+
+- Website: https://pieceofcake2.github.io/sitemap/
+- Markdown: [docs/README.md](docs/README.md) (for AI tools and offline reading)
+
+The Markdown documentation is also included in the Composer package, in the plugin's directory: `plugins/Sitemap/docs/README.md` (the location depends on your `installer-paths`). Install the package with `--dev` if you only need it for development.
+
 ## Requirements
 
 * PHP 8.0+
@@ -25,10 +32,6 @@ composer require pieceofcake2/sitemap
 
 Then load the plugin with its routes and add the behavior to your models.
 See [Installation](docs/README.md#installation) and [Usage](docs/README.md#usage).
-
-## Documentation
-
-Documentation: https://pieceofcake2.github.io/sitemap/
 
 ## Contributing
 
