@@ -116,3 +116,12 @@ layout: `app/View/Pages/`) are listed as well, with the priority `1.0` and the c
 
 - Only the models of the application are listed, not the models of plugins.
 - The HTML sitemap is a definition list (`<dl>`) per model.
+
+## Origin
+
+This package is a maintained fork of
+[loadsys/CakePHP-Sitemap](https://github.com/loadsys/CakePHP-Sitemap) (`loadsys/cakephp_sitemap` on
+Packagist, last upstream version 1.0.2), originally by Loadsys Web Strategies. It is maintained for
+CakePHP 2 on modern PHP by [pieceofcake2](https://github.com/pieceofcake2). Changes from the
+original are listed in the
+[commit history since the fork](https://github.com/pieceofcake2/sitemap/compare/31a3e4b...1.x).
