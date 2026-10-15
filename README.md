@@ -39,6 +39,15 @@ See the [contribution guidelines](https://github.com/pieceofcake2/.github/blob/m
 
 Please report issues on [GitHub](https://github.com/pieceofcake2/sitemap/issues).
 
+## Origin
+
+This package is a maintained fork of
+[loadsys/CakePHP-Sitemap](https://github.com/loadsys/CakePHP-Sitemap) (`loadsys/cakephp_sitemap` on
+Packagist, last upstream version 1.0.2), originally by Loadsys Web Strategies. It is maintained for
+CakePHP 2 on modern PHP by [pieceofcake2](https://github.com/pieceofcake2). Changes from the
+original are listed in the
+[commit history since the fork](https://github.com/pieceofcake2/sitemap/compare/31a3e4b...1.x).
+
 ## License
 
 MIT License. Originally developed by [Loadsys Web Strategies](https://www.loadsys.com). See [LICENSE](LICENSE).
