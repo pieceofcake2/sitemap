@@ -71,7 +71,7 @@ class Post extends AppModel
 | オプション | デフォルト | 説明 |
 | --- | --- | --- |
 | `primaryKey` | `'id'` | `loc` のメソッドに値を渡すフィールド。 |
-| `loc` | `'buildUrl'` | レコードの URL を返すモデルメソッドの名前。`primaryKey` のフィールドの値を引数に呼び出されます。デフォルトの `buildUrl` は、モデルに対応するコントローラーの `view` アクションの完全な URL (例: `/posts/view/1`) を返します。 |
+| `loc` | `'buildUrl'` | レコードの URL を返すモデルメソッドの名前。`primaryKey` のフィールドの値を引数に呼び出されます。デフォルトの `buildUrl` は、モデルに対応するコントローラーの `view` アクションの完全な URL (例: `https://example.com/posts/view/1`) を返します。 |
 | `lastmod` | `'modified'` | 最終更新日時のフィールド。`false` にすると `<lastmod>` を出力しません。 |
 | `changefreq` | `'daily'` | そのモデルの全レコードの更新頻度。`false` にすると出力しません。 |
 | `priority` | `'0.9'` | そのモデルの全レコードの優先度。`false` にすると出力しません。 |
