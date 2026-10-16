@@ -65,7 +65,7 @@ All options are optional; the values above are the defaults.
 | Option | Default | Description |
 | --- | --- | --- |
 | `primaryKey` | `'id'` | Field whose value is passed to the `loc` method. |
-| `loc` | `'buildUrl'` | Name of the model method that returns the URL of a record. It is called with the value of the `primaryKey` field. The default `buildUrl` returns the full URL of the `view` action of the model's controller, e.g. `/posts/view/1`. |
+| `loc` | `'buildUrl'` | Name of the model method that returns the URL of a record. It is called with the value of the `primaryKey` field. The default `buildUrl` returns the full URL of the `view` action of the model's controller, e.g. `https://example.com/posts/view/1`. |
 | `lastmod` | `'modified'` | Field with the last modification date, or `false` to omit `<lastmod>`. |
 | `changefreq` | `'daily'` | Change frequency of all records of the model, or `false` to omit it. |
 | `priority` | `'0.9'` | Priority of all records of the model, or `false` to omit it. |
